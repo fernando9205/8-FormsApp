@@ -1,0 +1,81 @@
+<h4>Formularios <small>template</small></h4>
+<hr>
+<form novalidate (ngSubmit)="guardar(f)" #f="ngForm">
+    <div>
+
+        <div class="form-group row" [ngClass]="{'has-danger': (nombre.errors?.required || nombre.errors?.minlength) && nombre.touch }">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-8">
+                <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" required minlength="3" #nombre="ngModel">
+                <span class="form-control-feedback" *ngIf="nombre.errors?.required"> Campo obligatorio</span>
+                <span class="form-control-feedback" *ngIf="nombre.errors?.minlength">Mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+        <div class="form-group row" [ngClass]="{'has-danger': (apellido.errors?.required || apellido.errors?.minlength) && nombre.touch }">
+            <label class="col-2 col-form-label ">Apellido</label>
+            <div class="col-8 ">
+                <input class="form-control " type="text " placeholder="Apellido " name="apellido" [(ngModel)]="usuario.apellido" required minlength="3" #apellido="ngModel">
+                <span class="form-control-feedback" *ngIf="apellido.errors?.required"> Campo obligatorio</span>
+                <span class="form-control-feedback" *ngIf="apellido.errors?.minlength">Mínimo 3 caracteres</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group row" [ngClass]="{'has-danger': (correo.errors?.required || correo.errors?.pattern) && nombre.touch }">
+        <label class="col-2 col-form-label ">Correo</label>
+        <div class="col-md-8 ">
+            <input class="form-control " type="email" placeholder="Correo electrónico" name="correo" [(ngModel)]="usuario.correo" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #correo="ngModel">
+            <span class="form-control-feedback" *ngIf="correo.errors?.required"> Campo obligatorio</span>
+            <span class="form-control-feedback" *ngIf="correo.errors?.pattern">Formato incorrecto</span>
+        </div>
+    </div>
+
+
+
+    <div class="form-group row ">
+        <label class="col-2 col-form-label ">Pais</label>
+        <div class="col-md-8 ">
+            <select class="form-control" name="pais" [(ngModel)]="usuario.pais">
+                <option selected="selected" value="0">Seleccione...</option>
+                <option *ngFor="let item of paises" [value]="item.codigo">
+                        {{item.nombre}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row ">
+        <label class="col-2 col-form-label ">Sexo</label>
+        <div class="col-md-8 ">
+            <div class="form-check" *ngFor="let sexo of sexos">
+                <input [(ngModel)]="usuario.sexo" class="form-check-input" type="radio" name="sexo" [value]="sexo">
+                <label class="form-check-label">{{sexo}}</label>
+            </div>
+            <!-- <div class="form-check">
+                <input [(ngModel)]="usuario.sexo" class="form-check-input" type="radio" name="sexo" value="Femenino">
+                <label class="form-check-label">Femenino</label>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="form-group row ">
+        <label class="col-2 col-form-label ">Acepta</label>
+        <div class="col-md-8 ">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="usuario.acepta" name="acepta" [value]="usuario.acepta">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label ">&nbsp;</label>
+        <div class="input-group col-md-8 ">
+            <button type="submit " class="btn btn-outline-primary ">
+            Guardar
+          </button>
+        </div>
+    </div>
+
+</form>
